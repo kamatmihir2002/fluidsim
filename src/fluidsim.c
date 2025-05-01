@@ -211,7 +211,7 @@ void set_properties(fluid_grid* f, float rho, float nu, float dt, double* bc) {
 }
 
 
-void build_up_b(fluid_grid* f) {
+void poisson_rhs(fluid_grid* f) {
     
     double *u = f->_u,
             *v = f->_v,

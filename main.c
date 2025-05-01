@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
             int nit = 0;
             double err = 1.0;
             
-            build_up_b(fl1);
+            poisson_rhs(fl1);
 
             while (err > 0.1 && nit < 200) {
                 
@@ -330,13 +330,13 @@ int main(int argc, char** argv) {
                 int rowofs = omp_get_thread_num() % nparallel_count;
                 fluid_grid* G = stacked_grid[rownum * nparallel_count + rowofs];
                 if (G)
-                build_up_b(G);
+                poisson_rhs(G);
             }
 
             // #pragma omp parallel for
             // for (int y = 1; y < nparallel_count - 1; y++) {
             //     for (int x = 1; x < nparallel_count - 1; x++) {
-            //     build_up_b(stacked_grid[y * nparallel_count + x]);
+            //     poisson_rhs(stacked_grid[y * nparallel_count + x]);
             //     }
             // }
 
@@ -385,7 +385,7 @@ int main(int argc, char** argv) {
 
                 fl_restrict_p(flc->_p, stacked_grid, nparallel_count, nparallel_count);
                 
-                build_up_b(flc);
+                poisson_rhs(flc);
                 double err3 = pressure_poisson_single(flc, 1, 1, 1, 1);
 
                 diff(flc->_p_diff, flc->_p_next, flc->_p, flc->_nx, flc->_ny);

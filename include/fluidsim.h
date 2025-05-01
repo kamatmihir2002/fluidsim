@@ -128,7 +128,7 @@ void ld_cavity(fluid_grid* f, float velx, float vely, int col);
 void set_properties(fluid_grid* f, float rho, float nu, float dt, double* bc);
 
 
-void build_up_b(fluid_grid* f);
+void poisson_rhs(fluid_grid* f);
 
 double pressure_poisson_single(fluid_grid* f, int include_left, int include_right, int include_top, int include_bottom);
 
